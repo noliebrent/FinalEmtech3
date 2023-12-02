@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'reac
 import { auth } from '../src/firebase'; // Import Firebase auth
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'; // Import Firebase createUserWithEmailAndPassword
 import { getDatabase, ref, set } from "firebase/database";
-import { AntDesign, MaterialIcons, Feather, FontAwesome } from '@expo/vector-icons';
 
 export default function SignUpScreen({ navigation }) {
   const [studentNumber, setStudentNumber] = useState('');
@@ -11,8 +10,6 @@ export default function SignUpScreen({ navigation }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
-  const [name, setName] = useState('');
-
 
   const db = getDatabase();
 
@@ -37,11 +34,6 @@ export default function SignUpScreen({ navigation }) {
       return;
     }
 
-    if (!name.trim()) {
-      alert("Name is required");
-      return;
-    }
-
     try {
       // Create user in Authentication
       const authUser = await createUserWithEmailAndPassword(auth, email, password);
@@ -52,7 +44,6 @@ export default function SignUpScreen({ navigation }) {
       // Update Realtime Database
       const userId = authUser.user.uid;
       await set(ref(db, `users/${userId}`), {
-        name: name,
         email: email,
         studentNumber: studentNumber,
       });
@@ -77,18 +68,7 @@ export default function SignUpScreen({ navigation }) {
           <Text style={styles.title}>CREATE AN ACCOUNT</Text>
         </View>
       </View>
-      <View>
-        <Text style={[styles.phrase, { marginBottom: 50 }]}>Don't wait, start finding your lost items - Sign up today!</Text>
-      </View>
-      <View style={styles.inputborder}>
-        <TextInput
-        placeholder="*Name"
-        style={styles.inputtext}
-        placeholderTextColor="#E9D735"
-        value={name}
-        onChangeText={(text) => setName(text)}
-        />
-</View>
+      
       <View style={styles.inputborder}>
         <TextInput
           placeholder="*Student Number"
@@ -117,7 +97,7 @@ export default function SignUpScreen({ navigation }) {
           onChangeText={(text) => setPassword(text)}
         />
       </View>
-      <View style={styles.inputborder}>
+      <View style={styles.inputborder}> 
         <TextInput
           placeholder="*Confirm Password"
           style={styles.inputtext}
@@ -153,7 +133,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 30,
     marginBottom: 20,
   },
   image: {
@@ -166,11 +146,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: 'white',
+    paddingTop:15,
     paddingBottom: 10,
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
   phrase: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'white',
     paddingTop: 5,
     alignContent: 'center',
@@ -179,16 +160,18 @@ const styles = StyleSheet.create({
     borderBottomColor: 'white',
     borderBottomWidth: 1,
     width: 240,
-    marginBottom: 35,
+    marginBottom: 15,
   },
   inputtext: {
-    fontSize: 14,
-    fontStyle: 'italic',
+    fontSize: 13,
+    fontWeight: '100',
     color: '#E9D735',
-    paddingBottom: 18,
-    paddingTop: 10,
+    marginTop: 5,
+    paddingBottom: 13,
+    paddingTop: 15,
   },
   buttonContainer: {
+    marginTop: 50,
     backgroundColor: '#E9D735',
     paddingVertical: 7,
     alignItems: 'center',
@@ -202,7 +185,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 15,
     color: 'white',
-    fontWeight: 'bold',
   },
   signtext: {
     marginTop: 15,
@@ -211,4 +193,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-

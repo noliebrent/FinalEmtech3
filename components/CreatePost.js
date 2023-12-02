@@ -42,6 +42,23 @@ const ItemForm = ({ navigation }) => {
       }
     });
 
+  useEffect(() => {
+    loadFonts();
+  }, []);
+  
+  async function loadFonts() {
+    try {
+      await Font.loadAsync({
+        'Arial': require('../assets/fonts/Arial.ttf'),
+        'Georgia': require('../assets/fonts/georgia.ttf'),
+      });
+      console.log('Fonts loaded successfully');
+    } catch (error) {
+      console.error('Error loading fonts:', error);
+    }
+    // Set a state or do any other initialization after loading fonts if needed
+  }
+
     return () => unsubscribe();
   }, []);
 

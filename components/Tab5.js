@@ -128,6 +128,20 @@ export default function ProfileSetting({ navigation }) {
     }
   };
 
+  useEffect(() => {
+    loadFonts();
+  }, []);
+
+  async function loadFonts() {
+    await Font.loadAsync({
+      'Arial': require('../assets/fonts/Arial.ttf'),
+      'Georgia': require('../assets/fonts/georgia.ttf'),
+      'Helvetica': require('../assets/fonts/helvetica.ttf'),
+      'Verdana': require('../assets/fonts/Verdana.ttf'),
+    });
+    // Set a state or do any other initialization after loading fonts if needed
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile Settings</Text>

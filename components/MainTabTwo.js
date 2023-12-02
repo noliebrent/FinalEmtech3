@@ -123,6 +123,26 @@ export default function MainTabTwo({ navigation }) {
     }
   };
 
+  useEffect(() => {
+    loadFonts();
+  }, []);
+
+  async function loadFonts() {
+    try {
+      await Font.loadAsync({
+        'Arial': require('../assets/fonts/Arial.ttf'),
+        'Georgia': require('../assets/fonts/georgia.ttf'),
+        'Helvetica': require('../assets/fonts/helvetica.ttf'),
+        'Verdana': require('../assets/fonts/Verdana.ttf'),
+      });
+      console.log('Fonts loaded successfully');
+    } catch (error) {
+      console.error('Error loading fonts:', error);
+    }
+    // Set a state or do any other initialization after loading fonts if needed
+  }
+  
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>

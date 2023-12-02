@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TextInput,
 import { Ionicons, AntDesign, MaterialIcons, Feather } from '@expo/vector-icons';
 import { getAuth, onAuthStateChanged, } from 'firebase/auth';
 import { getDatabase, ref, set, push, onValue, } from 'firebase/database';
-
+import * as Font from 'expo-font';
 
 export default function MainTab({ navigation }) {
 
@@ -19,6 +19,7 @@ export default function MainTab({ navigation }) {
   const [activeTab, setActiveTab] = useState('FOR YOU');
 
   useEffect(() => {
+    
     const db = getDatabase();
     const auth = getAuth();
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -40,6 +41,26 @@ export default function MainTab({ navigation }) {
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    loadFonts();
+  }, []);
+
+  async function loadFonts() {
+    try {
+      await Font.loadAsync({
+        'Arial': require('./fonts/Arial.ttf'),
+        'Georgia': require('./fonts/georgia.ttf'),
+        'Helvetica': require('./fonts/helvetica.ttf'),
+        'Montserrat-Black': require('./fonts/Montserrat-Black.ttf'),
+      });
+      console.log('Fonts loaded successfully');
+    } catch (error) {
+      console.error('Error loading fonts:', error);
+    }
+    // Set a state or do any other initialization after loading fonts if needed
+  }
+  
 
   useEffect(() => {
     const auth = getAuth();
@@ -330,7 +351,7 @@ const styles = StyleSheet.create({
   tabText: {
     fontSize: 17,
     fontWeight: 'bold',
-    fontFamily: 'Verdana', 
+    fontFamily: 'Montserrat-Black', 
     color: '#485E6E', 
   },
   scrollContainer: {
@@ -421,7 +442,7 @@ const styles = StyleSheet.create({
   commentHeaderText: {
     fontSize: 18,
     fontWeight: 'bold',
-    fontFamily: 'Verdana',
+    fontFamily: 'Montserrat-Black',
     color: '#485E6E',
     marginTop: 30,
   },

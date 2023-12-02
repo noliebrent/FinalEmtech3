@@ -21,15 +21,17 @@ export default function Login({ navigation }) {
     }
   };
 
+  
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
-          source={require('./pictures/TIP.png')}
+          source={require('./pictures/LOSTNFOUND_LOGO_1_YELLOW.png')}
           style={styles.image}
         />
         <View>
-          <Text style={styles.imageText}>Lost and Found Tracker</Text>
+          <Text style={styles.imageText}>Let's help you find your things!</Text>
         </View>
       </View>
       <View style={styles.inputborder}>
@@ -87,32 +89,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 40,
     marginBottom: 20,
+    width: 500,
   },
   image: {
-    width: 150,
-    height: 150,
-    resizeMode: 'contain',
+    marginTop:20,
+    width: 350,
+    height: 170,
+    resizeMode: 'cover',
     alignItems: 'center',
   },
   imageText: {
-    fontSize: 25,
+    fontSize: 15,
     color: 'white',
-    paddingBottom: 20,
+    paddingTop:10,
+    paddingBottom: 30,
+    fontWeight: 'bold',
   },
   inputtext: {
-    fontSize: 15,
-    fontStyle: 'italic',
+    fontSize: 13,
+    fontWeight: '100',
     color: '#E9D735',
-    paddingBottom: 20,
+    marginTop: 5,
+    paddingBottom: 13,
     paddingTop: 15,
   },
   inputborder: {
     borderBottomColor: 'white',
-    borderBottomWidth: 1,
-    width: 240,
-    marginBottom: 25,
+    borderBottomWidth: .7,
+    width: 245,
+    marginBottom: 19,
   },
   buttonContainer: {
+    marginTop: 10,
     backgroundColor: '#E9D735',
     paddingVertical: 7,
     alignItems: 'center',
@@ -126,10 +134,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 15,
     color: 'white',
-    fontWeight: 'bold',
   },
   signtext: {
-    marginTop: 15,
+    marginTop: 20,
     fontSize: 15,
     color: '#E9D735',
     fontWeight: 'bold',
