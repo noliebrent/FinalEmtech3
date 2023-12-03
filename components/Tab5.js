@@ -251,6 +251,9 @@ export default function ProfileSetting({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Tab5')}>
           <Feather name="user" size={32} color="black" />
+        </TouchableOpacity>  
+        <TouchableOpacity onPress={() => navigation.navigate('NewPostsTab')}>
+          <Feather name="bell" size={32} color="black" />
         </TouchableOpacity>
       </View>
     </View>
@@ -332,12 +335,13 @@ const styles = StyleSheet.create({
   bottomNavigation: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#485E6E',
+    height: 60,
+    paddingHorizontal: 20,
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#485E6E',
-    height: 60,
-    paddingHorizontal: 20,
   },
 });

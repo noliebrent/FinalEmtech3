@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'; // Import MaterialIcons from Expo
+import { MaterialIcons, AntDesign, Feather } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import {
   getDatabase,
@@ -25,7 +25,7 @@ import {
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { set as setDatabaseData } from 'firebase/database';
 
-const ItemForm = ({ navigation }) => {
+const CreatePost = ({ navigation }) => {
   const [itemText, setItemText] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,23 +41,6 @@ const ItemForm = ({ navigation }) => {
         setUserEmail(user.email);
       }
     });
-
-  useEffect(() => {
-    loadFonts();
-  }, []);
-  
-  async function loadFonts() {
-    try {
-      await Font.loadAsync({
-        'Arial': require('../assets/fonts/Arial.ttf'),
-        'Georgia': require('../assets/fonts/georgia.ttf'),
-      });
-      console.log('Fonts loaded successfully');
-    } catch (error) {
-      console.error('Error loading fonts:', error);
-    }
-    // Set a state or do any other initialization after loading fonts if needed
-  }
 
     return () => unsubscribe();
   }, []);
@@ -136,6 +119,10 @@ const ItemForm = ({ navigation }) => {
     }
   };
 
+  const handleNavigate = (screen) => {
+    navigation.navigate(screen);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -193,6 +180,20 @@ const ItemForm = ({ navigation }) => {
         <Text style={styles.buttonText}>Post</Text>
       </TouchableOpacity>
       {isSubmitting && <ActivityIndicator size="large" color="#0000ff" />}
+      <View style={styles.bottomNavigation}>
+        <TouchableOpacity onPress={() => handleNavigate('CreatePost')}>
+          <MaterialIcons name="post-add" size={32} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleNavigate('MainTab')}>
+          <AntDesign name="home" size={32} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleNavigate('NewPostsTab')}>
+          <Feather name="bell" size={32} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleNavigate('Tab5')}>
+          <Feather name="user" size={32} color="black" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -260,6 +261,18 @@ const styles = StyleSheet.create({
   buttonDisabled: {
     backgroundColor: '#B5C7D3',
   },
+  bottomNavigation: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#485E6E',
+    height: 60,
+    paddingHorizontal: 20,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
 });
 
-export default ItemForm;
+export default CreatePost;
