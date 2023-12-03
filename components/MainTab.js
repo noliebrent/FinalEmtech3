@@ -487,4 +487,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Arial',
   },
+  activeTab: {
+  borderBottomWidth: 2,
+  borderBottomColor: '#485E6E',
+},
+
 });

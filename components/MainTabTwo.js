@@ -9,6 +9,9 @@ import { FontAwesome } from '@expo/vector-icons';
 
 export default function MainTabTwo({ navigation }) {
   
+  const [activeTab, setActiveTab] = useState('YOUR POSTS');
+
+
   const [isCommentModalVisible, setCommentModalVisible] = useState(false);
   const [comment, setComment] = useState('');
   const [currentPost, setCurrentPost] = useState(null);
@@ -161,18 +164,31 @@ export default function MainTabTwo({ navigation }) {
       </View>
 
       <View style={styles.tabsContainer}>
-        <TouchableOpacity
-          style={styles.tab}
-          onPress={() => navigation.navigate('MainTab')}
+      <TouchableOpacity
+          style={[
+            styles.tab,
+            activeTab === 'FOR YOU' && styles.activeTab, // Add this line
+          ]}
+          onPress={() => {
+            navigation.navigate('MainTab');
+            setActiveTab('FOR YOU'); // Add this line
+          }}
         >
           <Text style={styles.tabText}>FOR YOU</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.tab}
-          onPress={() => navigation.navigate('MainTabTwo')}
+          style={[
+            styles.tab,
+            activeTab === 'YOUR POSTS' && styles.activeTab, // Add this line
+          ]}
+          onPress={() => {
+            navigation.navigate('MainTabTwo');
+            setActiveTab('YOUR POSTS'); // Add this line
+          }}
         >
           <Text style={styles.tabText}>YOUR POSTS</Text>
         </TouchableOpacity>
+
       </View>
 
       <ScrollView style={styles.scrollContainer}>
@@ -457,5 +473,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontFamily: 'Arial',
+  },
+  activeTab: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#485E6E',
   },
 });
